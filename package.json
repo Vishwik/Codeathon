@@ -1,0 +1,18 @@
+{
+  "name": "codeathon",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Initial full-stack scaffold for the Codeathon team.",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:api": "npm --workspace apps/api run dev",
+    "dev:web": "npm --workspace apps/web run dev",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
