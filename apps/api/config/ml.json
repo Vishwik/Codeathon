@@ -1,0 +1,33 @@
+{
+  "seed": 42,
+  "chunk_size": 100000,
+  "max_training_rows": 1000000,
+  "xgboost": {
+    "objective": "binary:logistic",
+    "tree_method": "hist",
+    "max_depth": 4,
+    "learning_rate": 0.05,
+    "n_estimators": 500,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "early_stopping_rounds": 30,
+    "eval_metric": "aucpr",
+    "n_jobs": 4
+  },
+  "isolation_forest": {
+    "sample_rows": 150000,
+    "n_estimators": 200,
+    "max_samples": 256,
+    "contamination": "auto",
+    "n_jobs": 4
+  },
+  "policy": {
+    "version": "policy-v1",
+    "fraud_threshold": 0.5,
+    "review_threshold": 30,
+    "high_threshold": 70,
+    "anomaly_start": 0.95,
+    "anomaly_end": 0.999,
+    "anomaly_weight": 0.7
+  }
+}

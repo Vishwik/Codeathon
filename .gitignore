@@ -27,3 +27,15 @@ Thumbs.db
 # Local caches
 .cache/
 .vite/
+
+# Local ML runtime, data and generated artifacts
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+data/
+artifacts/
+*.joblib
+*.ubj
+*.sqlite*
+*.db
