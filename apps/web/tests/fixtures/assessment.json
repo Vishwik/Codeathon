@@ -1,0 +1,131 @@
+{
+  "transaction": {
+    "transaction_id": "txn_normal_3488",
+    "step": 120,
+    "type": "PAYMENT",
+    "amount": 125.5,
+    "sender_id": "C109283741",
+    "recipient_id": "M382910293"
+  },
+  "assessment": {
+    "schema_version": "1.0",
+    "transaction_id": "txn_normal_3488",
+    "bundle_version": "synthetic-bundle",
+    "feature_version": "static-v1",
+    "policy_version": "policy-v1",
+    "fraud_probability": 0.000009956056223684026,
+    "fraud_prediction": "LEGITIMATE",
+    "anomaly_percentile": 0.3028571428571429,
+    "anomaly_score": 0,
+    "risk_score": 0.0009956056223684026,
+    "risk_level": "LOW",
+    "suspicious": false,
+    "reasons": [
+      {
+        "code": "SHAP_LOG_AMOUNT",
+        "source": "CLASSIFIER",
+        "message": "Log transaction amount (encoded value 4.84) decreased the classifier raw score relative to its baseline."
+      },
+      {
+        "code": "SHAP_TYPE_PAYMENT",
+        "source": "CLASSIFIER",
+        "message": "Transaction type: PAYMENT (encoded value 1) decreased the classifier raw score relative to its baseline."
+      },
+      {
+        "code": "SHAP_HOUR_SIN",
+        "source": "CLASSIFIER",
+        "message": "Hour of day (sine) (encoded value 0) decreased the classifier raw score relative to its baseline."
+      },
+      {
+        "code": "ANOMALY_PERCENTILE",
+        "source": "ANOMALY",
+        "message": "Abnormality is at percentile 30.29 of the fixed legitimate calibration reference; this is not fraud probability."
+      },
+      {
+        "code": "RISK_POLICY",
+        "source": "POLICY",
+        "message": "Hybrid risk 0.00/100 combines fraud probability and anomaly severity; review threshold is 30."
+      }
+    ],
+    "explanation": {
+      "units": "raw_log_odds",
+      "raw_margin": -2.0221781730651855,
+      "base_value": -1.9490998983383179,
+      "contributions": [
+        {
+          "feature": "log_amount",
+          "label": "Log transaction amount",
+          "value": 4.840242385864258,
+          "contribution": -0.05229569599032402
+        },
+        {
+          "feature": "type_CASH_IN",
+          "label": "Transaction type: CASH_IN",
+          "value": 0,
+          "contribution": 0.0018424122827127576
+        },
+        {
+          "feature": "type_CASH_OUT",
+          "label": "Transaction type: CASH_OUT",
+          "value": 0,
+          "contribution": 0
+        },
+        {
+          "feature": "type_DEBIT",
+          "label": "Transaction type: DEBIT",
+          "value": 0,
+          "contribution": 0.0034864472690969706
+        },
+        {
+          "feature": "type_PAYMENT",
+          "label": "Transaction type: PAYMENT",
+          "value": 1,
+          "contribution": -0.01432754099369049
+        },
+        {
+          "feature": "type_TRANSFER",
+          "label": "Transaction type: TRANSFER",
+          "value": 0,
+          "contribution": -0.0007789797382429242
+        },
+        {
+          "feature": "hour_sin",
+          "label": "Hour of day (sine)",
+          "value": 0,
+          "contribution": -0.00918995775282383
+        },
+        {
+          "feature": "hour_cos",
+          "label": "Hour of day (cosine)",
+          "value": 1,
+          "contribution": -0.00181487831287086
+        },
+        {
+          "feature": "destination_merchant",
+          "label": "Merchant destination",
+          "value": 1,
+          "contribution": 0
+        },
+        {
+          "feature": "destination_customer",
+          "label": "Customer destination",
+          "value": 0,
+          "contribution": 0
+        }
+      ]
+    },
+    "assessment_id": 9,
+    "review_status": "REVIEWED",
+    "recommended_action": "APPROVE",
+    "fallback_used": false,
+    "created_at": "2026-09-15T08:53:56.125053"
+  },
+  "decision": {
+    "decision": "APPROVE",
+    "note": null,
+    "decided_by": "Demo investigator",
+    "transaction_id": "txn_normal_3488",
+    "timestamp": "2026-09-15T08:54:22.130640"
+  },
+  "idempotent_replay": true
+}
