@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #051424;
+  --color-surface-dim: #051424;
+  --color-surface-bright: #2c3a4c;
+  --color-surface-container-lowest: #010f1f;
+  --color-surface-container-low: #0d1c2d;
+  --color-surface-container: #122131;
+  --color-surface-container-high: #1c2b3c;
+  --color-surface-container-highest: #273647;
+  --color-on-surface: #d4e4fa;
+  --color-on-surface-variant: #c2c6d6;
+  --color-inverse-surface: #d4e4fa;
+  --color-inverse-on-surface: #233143;
+  --color-outline: #8c909f;
+  --color-outline-variant: #424754;
+  --color-surface-tint: #adc6ff;
+  --color-primary: #adc6ff;
+  --color-on-primary: #002e6a;
+  --color-primary-container: #4d8eff;
+  --color-on-primary-container: #00285d;
+  --color-inverse-primary: #005ac2;
+  --color-secondary: #d0bcff;
+  --color-on-secondary: #3c0091;
+  --color-secondary-container: #571bc1;
+  --color-on-secondary-container: #c4abff;
+  --color-tertiary: #4cd7f6;
+  --color-on-tertiary: #003640;
+  --color-tertiary-container: #009eb9;
+  --color-on-tertiary-container: #002f38;
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+  --color-primary-fixed: #d8e2ff;
+  --color-primary-fixed-dim: #adc6ff;
+  --color-on-primary-fixed: #001a42;
+  --color-on-primary-fixed-variant: #004395;
+  --color-secondary-fixed: #e9ddff;
+  --color-secondary-fixed-dim: #d0bcff;
+  --color-on-secondary-fixed: #23005c;
+  --color-on-secondary-fixed-variant: #5516be;
+  --color-tertiary-fixed: #acedff;
+  --color-tertiary-fixed-dim: #4cd7f6;
+  --color-on-tertiary-fixed: #001f26;
+  --color-on-tertiary-fixed-variant: #004e5c;
+  --color-background: #051424;
+  --color-on-background: #d4e4fa;
+  --color-surface-variant: #273647;
+
+  --font-headline-xl: Inter, sans-serif;
+  --font-headline-lg: Inter, sans-serif;
+  --font-headline-md: Inter, sans-serif;
+  --font-body-lg: Inter, sans-serif;
+  --font-body-md: Inter, sans-serif;
+  --font-body-sm: Inter, sans-serif;
+  --font-label-code-lg: "JetBrains Mono", monospace;
+  --font-label-code-md: "JetBrains Mono", monospace;
+  --font-label-code-sm: "JetBrains Mono", monospace;
+  --font-metric-display: "JetBrains Mono", monospace;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: Inter, sans-serif;
+}
+
+@layer base {
+  * {
+    border-color: #1c2b3c;
+  }
+  body {
+    font-family: Inter, sans-serif;
+    background-color: #051424;
+    color: #d4e4fa;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  code, pre, .font-mono {
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #051424;
+}
+::-webkit-scrollbar-thumb {
+  background: #1c2b3c;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #273647;
+}
+
+/* Keep the exported desktop layout while allowing narrow screens and long IDs. */
+* { letter-spacing: 0 !important; }
+main, main > div { min-width: 0; }
+button, td, span, p { overflow-wrap: anywhere; }
+@media (max-width: 767px) {
+ header > div { min-width: 0; gap: 8px; }
+ header img { max-width: 32px; }
+ header .text-base + span { display: none; }
+ .grid > * { min-width: 0; }
+}
