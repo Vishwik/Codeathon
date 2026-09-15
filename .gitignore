@@ -27,3 +27,7 @@ Thumbs.db
 # Local caches
 .cache/
 .vite/
+
+# Local AI Studio import material
+ai-studio-temp/
+_ai_studio_extract/
