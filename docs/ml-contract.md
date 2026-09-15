@@ -36,7 +36,7 @@ The feature version and contract must be revised before history features are add
 
 ## Input
 
-All seven fields are required. Additional fields are forbidden.
+All six fields are required. Additional fields are forbidden.
 Strings are trimmed, nonempty and at most 200 characters. Numeric strings and
 booleans are rejected by the public typed contract.
 

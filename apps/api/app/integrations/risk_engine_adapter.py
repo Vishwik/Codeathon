@@ -1,7 +1,9 @@
 from dataclasses import dataclass
+import logging
 from typing import Any
 
-from ..schemas import MlAssessment, TransactionRequest
+from ..ml.contracts import RiskAssessment
+from ..schemas import TransactionRequest
 
 
 @dataclass
@@ -24,31 +26,21 @@ class RiskEngineAdapter:
     def load(self, model_dir: str) -> None:
         from app.ml import RiskEngine
 
+        self.engine = None
+        self.info_data = None
         self.engine = RiskEngine.load(model_dir)
         self.info_data = self.engine.info()
 
     def assess(self, transaction: TransactionRequest) -> AssessmentResult:
         payload = transaction.model_dump()
-        if self.engine is not None:
-            result = self.engine.assess(payload, context=None)
-            MlAssessment.model_validate(result)
-            return AssessmentResult(result)
-        if not self.fallback_enabled:
+        if self.engine is None:
             raise RuntimeError("ML model is unavailable")
-        fallback = {
-            "schema_version": "fallback-v1",
-            "transaction_id": transaction.transaction_id,
-            "bundle_version": "fallback-rules-v1",
-            "feature_version": "unavailable",
-            "policy_version": "fallback-rules-v1",
-            "fraud_probability": 0.0,
-            "fraud_prediction": "LEGITIMATE",
-            "anomaly_percentile": 0.0,
-            "anomaly_score": 0.0,
-            "risk_score": 50.0,
-            "risk_level": "MEDIUM",
-            "suspicious": True,
-            "reasons": ["ML model unavailable; manual review required."],
-            "explanation": "Fallback mode returned a conservative review result.",
-        }
-        return AssessmentResult(fallback, fallback_used=True, model_mode="fallback")
+        try:
+            result = self.engine.assess(payload, context=None)
+            validated = RiskAssessment.model_validate(result)
+            if validated.transaction_id != transaction.transaction_id:
+                raise ValueError("ML assessment transaction_id mismatch")
+            return AssessmentResult(result)
+        except Exception as error:
+            logging.getLogger(__name__).exception("ML assessment failed")
+            raise RuntimeError("ML assessment is unavailable") from error

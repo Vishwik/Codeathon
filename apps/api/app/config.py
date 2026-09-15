@@ -11,7 +11,7 @@ class Settings(BaseModel):
     database_url: str = "sqlite:///./data/riskops.db"
     cors_allowed_origins: str = "http://localhost:5173"
     ml_model_dir: str = "./models"
-    ml_fallback_enabled: bool = True
+    ml_fallback_enabled: bool = False
     log_level: str = "INFO"
 
     @property
@@ -28,7 +28,7 @@ def get_settings() -> Settings:
         "database_url": os.getenv("DATABASE_URL", "sqlite:///./data/riskops.db"),
         "cors_allowed_origins": os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:5173"),
         "ml_model_dir": os.getenv("ML_MODEL_DIR", "./models"),
-        "ml_fallback_enabled": os.getenv("ML_FALLBACK_ENABLED", "true"),
+        "ml_fallback_enabled": os.getenv("ML_FALLBACK_ENABLED", "false"),
         "log_level": os.getenv("LOG_LEVEL", "INFO"),
     }
     return Settings.model_validate(values)

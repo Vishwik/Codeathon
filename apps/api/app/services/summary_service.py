@@ -7,7 +7,8 @@ from ..schemas import SummaryResponse
 
 def summary(db: Session) -> SummaryResponse:
     assessments = db.scalars(select(Assessment)).all()
-    decisions = db.scalars(select(Decision)).all()
+    latest_ids = select(func.max(Decision.id)).group_by(Decision.transaction_id)
+    decisions = db.scalars(select(Decision).where(Decision.id.in_(latest_ids))).all()
     risk_counts = {key: sum(item.risk_level == key for item in assessments) for key in ("LOW", "MEDIUM", "HIGH")}
     fraud_counts = {key: sum(item.fraud_prediction == key for item in assessments) for key in ("FRAUD", "LEGITIMATE")}
     decision_counts = {key: sum(item.decision == key for item in decisions) for key in ("APPROVE", "BLOCK")}
